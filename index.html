@@ -272,8 +272,8 @@
 
     <p class="materials-text fade-item fade-4">Materiały filmowe:</p>
     <div class="buttons fade-item fade-5">
-      <button class="btn" onclick="window.open('https://youtu.be/9I38eT6Wcl0', '_blank')">Zwiastun</button>
-      <button class="btn" onclick="window.open('https://youtu.be/Vu_rOE1vA5U', '_blank')">Ślub i wesele</button>
+      <button class="btn" onclick="openYouTube('9I38eT6Wcl0')">Zwiastun</button>
+      <button class="btn" onclick="openYouTube('Vu_rOE1vA5U')">Ślub i wesele</button>
     </div>
 
     <button class="btn music-btn fade-item fade-6" onclick="window.open('https://vimeo.com/user/16268111/folder/22220019', '_blank')">Muzyka ze ślubu</button>
@@ -346,6 +346,27 @@
       window.open(GALLERY_URL, '_blank');
       closeGalleryPopup();
     };
+  }
+
+  function openYouTube(videoId) {
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    const webUrl = `https://www.youtube.com/watch?v=${videoId}`;
+
+    if (/android/i.test(ua)) {
+      const intentUrl = `intent://www.youtube.com/watch?v=${videoId}#Intent;package=com.google.android.youtube;scheme=https;end`;
+      window.location.href = intentUrl;
+    } else if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+      const appUrl = `youtube://www.youtube.com/watch?v=${videoId}`;
+      const now = Date.now();
+      setTimeout(() => {
+        if (Date.now() - now < 1200) { 
+          window.location.href = webUrl;
+        }
+      }, 1000);
+      window.location.href = appUrl;
+    } else {
+      window.location.href = webUrl;
+    }
   }
 </script>
 </body>
