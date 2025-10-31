@@ -145,8 +145,8 @@
     text-shadow: 1.5px 1.5px 4px rgba(0,0,0,0.5);
   }
 
-  /* --- Popupy --- */
-  .email-popup, .gallery-popup {
+  /* --- Popup galerii --- */
+  .gallery-popup {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
@@ -160,7 +160,7 @@
     z-index: 999;
   }
 
-  .email-popup.visible, .gallery-popup.visible {
+  .gallery-popup.visible {
     opacity: 1;
     pointer-events: all;
   }
@@ -280,24 +280,16 @@
 
     <div class="message-section fade-item fade-7">
       <p class="message-text">Chcesz się podzielić z nami swoimi wrażeniami?</p>
-      <button class="btn message-btn" onclick="openEmailPopup()">Napisz wiadomość</button>
+      <button class="btn message-btn"
+              onclick="window.location.href='mailto:krzysi3k.jurczak@gmail.com,julia.jurczak2023@gmail.com?subject=Wrażenia i emocje po obejrzeniu ślubnego filmu'">
+        Napisz wiadomość
+      </button>
     </div>
 
     <div class="meta fade-item fade-8">Julia i Krzysiek • Gdańsk, 29.09.2023</div>
   </div>
 
-  <!-- Popupy -->
-  <div id="emailPopup" class="email-popup" aria-hidden="true">
-    <div class="email-popup-content" role="dialog" aria-modal="true" aria-labelledby="emailTitle">
-      <p id="emailTitle">Wybierz sposób wysłania wiadomości:</p>
-      <div class="popup-buttons">
-        <button class="btn small" onclick="openGmail()">Gmail</button>
-        <button class="btn small" onclick="openMailClient()">Inny program</button>
-      </div>
-      <button class="btn close-btn small" onclick="closeEmailPopup()">Anuluj</button>
-    </div>
-  </div>
-
+  <!-- Popup galerii -->
   <div id="galleryPopup" class="gallery-popup" aria-hidden="true">
     <div class="email-popup-content" role="dialog" aria-modal="true" aria-labelledby="galleryTitle">
       <p id="galleryTitle">Otwórz galerię zdjęć – potrzebne hasło:</p>
@@ -312,23 +304,6 @@
 <script>
   const GALLERY_PASSWORD = "Wiolonczela";
   const GALLERY_URL = "https://ffxstudio.zalamo.com/s/2023-09-29-julia-i-krzysztof-2";
-
-  function openEmailPopup(){
-    document.getElementById('emailPopup').classList.add('visible');
-    document.getElementById('emailPopup').setAttribute('aria-hidden','false');
-  }
-  function closeEmailPopup(){
-    document.getElementById('emailPopup').classList.remove('visible');
-    document.getElementById('emailPopup').setAttribute('aria-hidden','true');
-  }
-  function openGmail(){
-    window.open('https://mail.google.com/mail/?view=cm&fs=1&to=krzysi3k.jurczak@gmail.com,julia.jurczak2023@gmail.com&su=Wrażenia i emocje po obejrzeniu ślubnego filmu', '_blank');
-    closeEmailPopup();
-  }
-  function openMailClient(){
-    window.location.href = 'mailto:krzysi3k.jurczak@gmail.com,julia.jurczak2023@gmail.com?subject=Wrażenia i emocje po obejrzeniu ślubnego filmu';
-    closeEmailPopup();
-  }
 
   function openGalleryPopup(){
     const popup = document.getElementById('galleryPopup');
